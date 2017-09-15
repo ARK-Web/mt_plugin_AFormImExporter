@@ -1,0 +1,54 @@
+<mt:Ignore>Copyright (c) 2008 ARK-Web Co.,Ltd.</mt:Ignore>
+<mt:setvarblock name="page_title"><__trans phrase="Import A-Form"></mt:setvarblock>
+<$mt:setvar name="position_actions_bottom" value="1"$>
+
+<mt:setvarblock name="system_msg">
+    <div id="msg-block">
+
+    <mt:if name="import_success">
+        <mtapp:statusmsg
+            id="import-success"
+            class="success">
+            <__trans phrase="Import successed"><mt:var name="aform_id" sprintf="(aform%03d)" escape="html">
+        </mtapp:statusmsg>
+    </mt:if>
+	</div>
+</mt:setvarblock>
+
+<mt:setvarblock name="related_content">
+</mt:setvarblock>
+
+<mt:setvarblock name="js_include" append="1">
+<script type="text/javascript" src="<$mt:var name="static_uri"$>js/edit.js?v=<$mt:var name="mt_version_id" escape="url"$>"></script>
+</mt:setvarblock>
+
+<mt:setvarblock name="html_head" append="1">
+</mt:setvarblock>
+
+<mt:setvarblock name="html_body" append="1">
+</mt:setvarblock>
+
+
+<mt:include name="include/header.tmpl" id="header_include">
+
+<form name="import-aform-form" id="import-aform-form" method="post" action="<$mt:var name="script_url"$>" enctype="multipart/form-data">
+<input type="hidden" name="__mode" value="import_aform_process" />
+<input type="hidden" name="blog_id" value="<mt:var name="blog_id">" />
+
+<input type="file" name="import_file" />
+
+<mt:setvarblock name="action_buttons">
+    <button
+        type="submit"
+        accesskey="s"
+        title="<__trans phrase="Import this [_1] (s)" params="<mt:var name="object_label" lower_case="1">">"
+        class="action primary-button"
+        ><__trans phrase="Import"></button>
+</mt:setvarblock>
+
+<mt:include name="include/actions_bar.tmpl" bar_position="bottom" hide_pager="1" settings_bar="1">
+
+<__trans phrase="Import description">
+</form>
+
+<mt:include name="include/footer.tmpl" id="footer_include">
