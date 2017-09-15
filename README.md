@@ -1,0 +1,2 @@
+# mt_plugin_AFormImExporter
+A-Formでつくったフォームのインポート/エクスポートができるプラグイン
