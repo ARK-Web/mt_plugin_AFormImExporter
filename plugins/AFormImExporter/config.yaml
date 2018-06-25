@@ -1,0 +1,26 @@
+id: AFormImExporter
+key: AFormImExporter
+name: A-Form ImExport
+author_name: <__trans phrase="_PLUGIN_AUTHOR">
+author_link: http://www.ark-web.jp/
+version: 1.0
+description: <__trans phrase="_PLUGIN_DESCRIPTION">
+doc_link: http://www.ark-web.jp/movabletype/
+l10n_class: AFormImExporter::L10N
+
+applications:
+    cms:
+        methods:
+            import_aform: $AFormImExporter::AFormImExporter::CMS::import_aform
+            import_aform_process: $AFormImExporter::AFormImExporter::CMS::import_aform_process
+            export_aform: $AFormImExporter::AFormImExporter::CMS::export_aform
+            export_aform_process: $AFormImExporter::AFormImExporter::CMS::export_aform_process
+        menus:
+            aform:import:
+                label: Import
+                mode: import_aform
+                order: 101000
+            aform:export:
+                label: Export
+                mode: export_aform
+                order: 102000
