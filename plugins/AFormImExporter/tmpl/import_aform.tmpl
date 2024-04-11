@@ -21,6 +21,30 @@
 
 <mt:setvarblock name="js_include" append="1">
 <script type="text/javascript" src="<$mt:var name="static_uri"$>js/edit.js?v=<$mt:var name="mt_version_id" escape="url"$>"></script>
+<script>
+jQuery(document).ready(function() {
+	jQuery('input[name="import_form"]').change(function() {
+		let val= jQuery(this).val();
+		if (val == 'other') {
+			jQuery('#other_form').attr('required', true);
+			jQuery('#other_forms').show(300);
+		} else {
+			jQuery('#other_form').attr('required', false);
+			jQuery('#other_forms').hide(300);
+		}
+	});
+	jQuery('input[name="import_blog"]').change(function() {
+		let val= jQuery(this).val();
+		if (val == 'other') {
+			jQuery('#other_blog').attr('required', true);
+			jQuery('#other_blogs').show(300);
+		} else {
+			jQuery('#other_blog').attr('required', false);
+			jQuery('#other_blogs').hide(300);
+		}
+	});
+});
+</script>
 </mt:setvarblock>
 
 <mt:setvarblock name="html_head" append="1">
@@ -43,9 +67,72 @@
 <input type="hidden" name="__mode" value="import_aform_process" />
 <input type="hidden" name="blog_id" value="<mt:var name="blog_id">" />
 
-<fieldset class="form-group">
-<input type="file" name="import_file" class="form-control-file" />
-</fieldset>
+<mtapp:setting
+	id="import_file"
+	label="<__trans phrase="Import file">">
+	<input type="file" name="import_file" class="form-control-file" required title="<__trans phrase="Import file">" />
+</mtapp:setting>
+
+<mtapp:setting
+	id="import_form"
+	label="<__trans phrase="Import form">"
+	hint="<__trans phrase="Import form hint">"
+	show_hint="1">
+
+	<div class="custom-control custom-radio mb-3">
+		<input class="custom-control-input" type="radio" name="import_form" id="import_form_new" value="new" required />
+		<label class="custom-control-label" for="import_form_new"><__trans phrase="New form"></label>
+	</div>
+
+	<div class="custom-control custom-radio mb-3">
+		<input class="custom-control-input" type="radio" name="import_form" id="import_form_same" value="same" required />
+		<label class="custom-control-label" for="import_form_same"><__trans phrase="Same form"></label>
+	</div>
+
+	<div class="custom-control custom-radio mb-3">
+		<input class="custom-control-input" type="radio" name="import_form" id="import_form_other" value="other" required />
+		<label class="custom-control-label" for="import_form_other"><__trans phrase="Other form"></label>
+	</div>
+
+	<div id="other_forms" style="display:none;">
+	<select name="other_form" id="other_form" class="custom-select form-control" title="<__trans phrase="Please select form">">
+		<option value=""><__trans phrase="Please select form"></option>
+	<mt:loop name="aforms">
+		<option value="<mt:var name="id" escape="html">"><mt:var name="title" escape="html">(ID:<mt:var name="id" escape="html">)</option>
+	</mt:loop>
+	</select>
+	</div>
+</mtapp:setting>
+
+<mtapp:setting
+	id="blog"
+	label="<__trans phrase="Import blog">">
+
+	<div class="custom-control custom-radio mb-3">
+		<input class="custom-control-input" type="radio" name="import_blog" id="import_blog_global" value="global" required />
+		<label class="custom-control-label" for="import_blog_global"><__trans phrase="Global"></label>
+	</div>
+
+	<div class="custom-control custom-radio mb-3">
+		<input class="custom-control-input" type="radio" name="import_blog" id="import_blog_same" value="same" required />
+		<label class="custom-control-label" for="import_blog_same"><__trans phrase="Same blog"></label>
+	</div>
+
+	<div class="custom-control custom-radio mb-3">
+		<input class="custom-control-input" type="radio" name="import_blog" id="import_blog_other" value="other" required />
+		<label class="custom-control-label" for="import_blog_other"><__trans phrase="Other blog"></label>
+	</div>
+
+	<div id="other_blogs" style="display:none;">
+	<select name="other_blog" id="other_blog" class="custom-select form-control" title="<__trans phrase="Please select blog">">
+		<option value=""><__trans phrase="Please select blog"></option>
+	<mt:loop name="sites">
+		<option value="<mt:var name="id" escape="html">"><mt:var name="name" escape="html">(ID:<mt:var name="id" escape="html">)</option>
+	</mt:loop>
+	</select>
+	</div>
+</mtapp:setting>
+	
 
 <mt:include name="include/actions_bar.tmpl" bar_position="bottom" hide_pager="1" settings_bar="1">
 
